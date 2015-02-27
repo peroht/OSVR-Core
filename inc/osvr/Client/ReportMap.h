@@ -33,7 +33,6 @@
 namespace osvr {
 namespace client {
     namespace traits {
-
         namespace detail {
             struct FusionMakePair {
                 template <typename T1, typename T2> struct apply {
@@ -55,6 +54,28 @@ namespace client {
                 typename boost::fusion::result_of::as_map<PairSequence>::type
                     type;
         };
+
+        template <typename KeyTypes, template <typename> class ValueTypeAlias>
+        struct GenerateMap {
+            // mpl::transform wants a metafunction class, hence why we use
+            // result_of::make_pair here instead of pair
+            struct GeneratePair {
+                template <typename KeyType>
+                using apply = boost::fusion::result_of::make_pair<
+                    KeyType, ValueTypeAlias<KeyType> >;
+            };
+            typedef
+                typename boost::mpl::transform<KeyTypes, GeneratePair>::type;
+            PairSequence;
+            typedef
+                typename boost::fusion::result_of::as_map<PairSequence>::type
+                    type;
+        };
+
+        template <template <typename> class ValueTypeAlias>
+        using ReportMap =
+            typename GenerateMap<ReportTypes, ValueTypeAlias>::type;
+
     } // namespace traits
 } // namespace client
 } // namespace osvr

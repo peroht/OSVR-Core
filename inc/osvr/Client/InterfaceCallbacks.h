@@ -36,15 +36,27 @@
 
 namespace osvr {
 namespace client {
+#if 0
     /// @brief Metafunction computing the storage for callbacks for a report
     /// type.
     template <typename ReportType> struct CallbackStorageType {
         typedef std::vector<std::function<void(const OSVR_TimeValue *,
                                                const ReportType *)> > type;
     };
+    struct CallbackStorage {
+        template <typename ReportType>
+        using CallbackStorage = std::vector<
+            std::function<void(const OSVR_TimeValue *, const ReportType *)> >;
+    };
 
     typedef traits::GenerateReportMap<CallbackStorageType<boost::mpl::_> >::type
         CallbackMap;
+#endif
+    template <typename ReportType>
+    using CallbackStorage = std::vector<
+        std::function<void(const OSVR_TimeValue *, const ReportType *)> >;
+
+    using CallbackMap = traits::ReportMap<CallbackStorage>;
 
     /// @brief Class to maintain callbacks for an interface for each report type
     /// explicitly enumerated.
