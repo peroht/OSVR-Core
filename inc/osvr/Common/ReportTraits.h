@@ -81,6 +81,7 @@ namespace common {
         OSVR_REPORT_TRAITS(EyeTrackerBlink)
         OSVR_REPORT_TRAITS(NaviVelocity)
         OSVR_REPORT_TRAITS(NaviPosition)
+        OSVR_REPORT_TRAITS(Gesture)
 #undef OSVR_REPORT_TRAITS
     } // namespace traits
 
