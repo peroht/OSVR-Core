@@ -76,6 +76,7 @@ namespace clientkit {
         OSVR_CALLBACK_METHODS(EyeTrackerBlink)
         OSVR_CALLBACK_METHODS(NaviVelocity)
         OSVR_CALLBACK_METHODS(NaviPosition)
+        OSVR_CALLBACK_METHODS(Gesture)
 /// @}
 
 #undef OSVR_CALLBACK_METHODS
