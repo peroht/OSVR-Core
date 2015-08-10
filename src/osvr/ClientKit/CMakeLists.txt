@@ -53,7 +53,9 @@ target_link_libraries(${LIBNAME_FULL}
     osvrClient
     osvrUtilCpp
     osvrCommon
-    eigen-headers)
+    eigen-headers
+    jsoncpp_lib
+    vendored-vrpn)
 
 ###
 # C++ (header-only) interface
