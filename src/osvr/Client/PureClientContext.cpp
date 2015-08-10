@@ -24,7 +24,6 @@
 
 // Internal Includes
 #include "PureClientContext.h"
-#include <osvr/Common/SystemComponent.h>
 #include <osvr/Common/CreateDevice.h>
 #include <osvr/Common/PathTreeFull.h>
 #include <osvr/Common/PathElementTools.h>
@@ -115,8 +114,16 @@ namespace client {
 
         /// Create the system client device.
         m_systemDevice = common::createClientDevice(sysDeviceName, m_mainConn);
-        m_systemComponent =
-            m_systemDevice->addComponent(common::SystemComponent::create());
+        m_systemComponent = common::SystemComponent::create();
+        m_systemDevice->addComponent(m_systemComponent);
+
+        /// Receive string map data whenever it comes
+        m_systemComponent->registerStringMapHandler(
+            [&](common::MapData const &dataMap,
+            util::time::TimeValue const &timestamp) {
+            m_handleRegStringMap(dataMap, timestamp);
+        });
+
 #define OSVR_USE_DEDUP
 #ifdef OSVR_USE_DEDUP
         typedef common::DeduplicatingFunctionWrapper<Json::Value const &>
@@ -214,6 +221,10 @@ namespace client {
         return m_pathTree;
     }
 
+    shared_ptr<common::SystemComponent> PureClientContext::m_getSystemComponent() {
+        return m_systemComponent;
+    }
+
     bool PureClientContext::m_connectCallbacksOnPath(std::string const &path) {
         /// Start by removing handler from interface tree and handler container
         /// for this path, if found. Ensures that if we early-out (fail to set
@@ -291,6 +302,12 @@ namespace client {
 
         // re-connect handlers.
         m_connectNeededCallbacks();
+    }
+
+    void PureClientContext::m_handleRegStringMap(common::MapData const &data,
+        util::time::TimeValue const &timestamp){
+        auto map = m_systemComponent->getRegStringMap();
+        map->corrMap.setupPeerMappings(data.serializedMap);
     }
 
 } // namespace client
