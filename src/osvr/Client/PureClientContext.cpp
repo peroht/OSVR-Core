@@ -114,15 +114,15 @@ namespace client {
 
         /// Create the system client device.
         m_systemDevice = common::createClientDevice(sysDeviceName, m_mainConn);
-        m_systemComponent = common::SystemComponent::create();
-        m_systemDevice->addComponent(m_systemComponent);
+        m_systemComponent =
+            m_systemDevice->addComponent(common::SystemComponent::create());
 
         /// Receive string map data whenever it comes
         m_systemComponent->registerStringMapHandler(
             [&](common::MapData const &dataMap,
-            util::time::TimeValue const &timestamp) {
-            m_handleRegStringMap(dataMap, timestamp);
-        });
+                util::time::TimeValue const &timestamp) {
+                m_handleRegStringMap(dataMap, timestamp);
+            });
 
 #define OSVR_USE_DEDUP
 #ifdef OSVR_USE_DEDUP
@@ -221,7 +221,7 @@ namespace client {
         return m_pathTree;
     }
 
-    shared_ptr<common::SystemComponent> PureClientContext::m_getSystemComponent() {
+    common::SystemComponent *PureClientContext::m_getSystemComponent() {
         return m_systemComponent;
     }
 
@@ -304,8 +304,8 @@ namespace client {
         m_connectNeededCallbacks();
     }
 
-    void PureClientContext::m_handleRegStringMap(common::MapData const &data,
-        util::time::TimeValue const &timestamp){
+    void PureClientContext::m_handleRegStringMap(
+        common::MapData const &data, util::time::TimeValue const &timestamp) {
         auto map = m_systemComponent->getRegStringMap();
         map->corrMap.setupPeerMappings(data.serializedMap);
     }

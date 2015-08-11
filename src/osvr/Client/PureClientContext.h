@@ -36,7 +36,6 @@
 #include "VRPNConnectionCollection.h"
 #include <osvr/Client/InterfaceTree.h>
 #include "RemoteHandlerFactory.h"
-#include <osvr/Util/SharedPtr.h>
 
 // Library/third-party includes
 #include <vrpn_ConnectionPtr.h>
@@ -75,7 +74,7 @@ namespace client {
 
         bool m_getStatus() const override;
 
-        virtual shared_ptr<common::SystemComponent> m_getSystemComponent();
+        virtual common::SystemComponent *m_getSystemComponent();
 
         /// @brief Given a path, remove any existing handler for that path, then
         /// attempt to fully resolve the path to its source and construct a
@@ -108,7 +107,7 @@ namespace client {
 
         /// @brief The system component providing access to sending/receiving
         /// control messages.
-        shared_ptr<common::SystemComponent> m_systemComponent;
+        common::SystemComponent *m_systemComponent;
 
         /// @brief All open VRPN connections, keyed by host
         VRPNConnectionCollection m_vrpnConns;
@@ -134,7 +133,7 @@ namespace client {
 
         /// @brief Called whenever an updated string to ID map is available
         void m_handleRegStringMap(common::MapData const &data,
-            util::time::TimeValue const &timestamp);
+                                  util::time::TimeValue const &timestamp);
     };
 } // namespace client
 } // namespace osvr
