@@ -86,6 +86,8 @@ namespace server {
 
         m_systemComponent =
             m_systemDevice->addComponent(common::SystemComponent::create());
+        m_ctx->setSystemComponent(m_systemComponent);
+
         m_systemComponent->registerClientRouteUpdateHandler(
             &ServerImpl::m_handleUpdatedRoute, this);
 
