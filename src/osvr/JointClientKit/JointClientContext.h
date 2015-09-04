@@ -76,6 +76,8 @@ namespace client {
 
         virtual common::PathTree const &m_getPathTree() const;
 
+        virtual osvr::common::SystemComponent *m_getSystemComponent();
+
         /// @brief Given a path, remove any existing handler for that path, then
         /// attempt to fully resolve the path to its source and construct a
         /// handler for it.
