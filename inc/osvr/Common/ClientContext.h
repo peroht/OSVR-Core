@@ -129,7 +129,7 @@ struct OSVR_ClientContextObject : boost::noncopyable {
     OSVR_COMMON_EXPORT virtual osvr::common::PathTree const &
     m_getPathTree() const = 0;
 
-    /// @brief Implementation of accessor for the path tree.
+    /// @brief Implementation of accessor for the system component
     OSVR_COMMON_EXPORT virtual osvr::common::SystemComponent *
     m_getSystemComponent() = 0;
 
@@ -153,7 +153,7 @@ namespace common {
                 delete o;
             }
         } // namespace
-    } // namespace detail
+    }     // namespace detail
 
     /// @brief Create a subclass object of ClientContext, setting the deleter
     /// appropriately by passing it as the last parameter. Compare to
