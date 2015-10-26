@@ -18,7 +18,8 @@ set(CLIENTS
     Locomotion
     MinimalInit
     TrackerState
-    ViewerEyeSurfaces)
+    ViewerEyeSurfaces
+    Skeleton)
 
 set(LIB_c osvrClientKit)
 set(LIB_cpp osvrClientKitCpp)
