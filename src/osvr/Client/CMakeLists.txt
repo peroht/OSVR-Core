@@ -45,6 +45,8 @@ set(SOURCE
     RemoteHandler.cpp
     RemoteHandlerFactory.cpp
     RemoteHandlerInternals.h
+    SkeletonRemoteFactory.cpp
+    SkeletonRemoteFactory.h
     TrackerRemoteFactory.cpp
     TrackerRemoteFactory.h
     Viewer.cpp
