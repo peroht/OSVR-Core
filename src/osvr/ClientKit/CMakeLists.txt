@@ -19,6 +19,7 @@ set(API
     "${HEADER_LOCATION}/InterfaceStateC.h"
     "${HEADER_LOCATION}/Parameters.h"
     "${HEADER_LOCATION}/ParametersC.h"
+    "${HEADER_LOCATION}/SkeletonC.h"
     "${HEADER_LOCATION}/SystemCallbackC.h"
     "${HEADER_LOCATION}/TransformsC.h")
 
