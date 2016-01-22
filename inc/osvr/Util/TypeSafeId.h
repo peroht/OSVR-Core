@@ -40,8 +40,7 @@ namespace util {
     /// ::osvr::util::TypeSafeId
     namespace typesafeid_traits {
         /// @brief Explicitly specialize for your tag type if you want a
-        /// different
-        /// underlying type.
+        /// different underlying type.
         template <typename Tag> struct WrappedType { typedef uint32_t type; };
 
         /// @brief Explicitly specialize for your tag type if you want a
@@ -94,7 +93,7 @@ namespace util {
         wrapped_type value() const { return m_val; }
 
         /// @brief Reference accessor to the (non-type-safe!) wrapped value
-        wrapped_type & value() { return m_val; }
+        wrapped_type &value() { return m_val; }
 
       private:
         /// @brief Utility function to access the SentinelValue trait.
