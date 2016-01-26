@@ -125,11 +125,6 @@ namespace util {
         /// @brief Read-only accessor to the (non-type-safe!) wrapped value
         wrapped_type value() const { return m_val; }
 
-        /// @brief Non-const reference accessor to the (non-type-safe!)
-        /// wrapped
-        /// value - only available if specifically provided for by a tag
-        /// specialization of traits.
-
       protected:
         /// @brief Utility function to access the SentinelValue trait.
         static wrapped_type sentinel() {
@@ -145,6 +140,10 @@ namespace util {
         typedef typename typesafeid_traits::WrappedType<Tag>::type wrapped_type;
         TypeSafeIdRefAccessorBase() : Base() {}
         explicit TypeSafeIdRefAccessorBase(wrapped_type val) : Base(val) {}
+
+        /// @brief Non-const reference accessor to the (non-type-safe!)
+        /// wrapped value - only available if specifically provided for by a tag
+        /// specialization of traits.
         wrapped_type &value() { return Base::m_val; }
     };
 
