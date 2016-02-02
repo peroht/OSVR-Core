@@ -109,6 +109,7 @@ set(API
     "${HEADER_LOCATION}/TreeNodeFullPath.h"
     "${HEADER_LOCATION}/TreeTraversalVisitor.h"
     "${HEADER_LOCATION}/TypeSafeId.h"
+    "${HEADER_LOCATION}/TypeSafeIdHash.h"
     "${HEADER_LOCATION}/UniquePtr.h"
     "${HEADER_LOCATION}/UniqueContainer.h"
     "${HEADER_LOCATION}/Util.h"
